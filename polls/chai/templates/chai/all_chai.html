@@ -1,5 +1,20 @@
 {% extends "layout.html" %} 
 {% block title %} Home Page {% endblock title %} 
 {% block content %}
-<h1 class='bg-orange-500 text-3xl'>All Types of chai available 🫖</h1>
+  <h1 class='bg-orange-500 text-xl p-3'>All Types of chai available 🫖</h1>
+  <div class='grid grid-cols-3 gap-4 m-4'>
+    {% for chai in chais %}
+      <div class='bg-blue-900 p-5 rounded-md shadow-lg'>
+        <img src="{{chai.image.url}}" alt="{{chai.name}}" class='w-full bg-contain rounded-md'>
+        <h2 class='text-xl my-3'>{{chai.name}}</h2>
+        {% comment %} <a href="{{chai.id}}">
+          <button type='button' class='inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'>{{chai.type}} - {{chai.id}}</button>
+        </a> {% endcomment %}
+        <a href="{% url 'chai:chai_details' chai.id %}"> 
+          {% comment %} chai:chai_details beacuse chai is the namespace for the app {% endcomment %}
+          <button type='button' class='inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'>{{chai.type}} - {{chai.id}}</button>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content %}
